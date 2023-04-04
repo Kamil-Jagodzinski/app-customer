@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import '../src/styles/App.css';
+import HeaderBar from './components/header/HeaderBar'
+import AppContent from './components/AppContent'
+import {useState} from 'react'
+
+import customers from './data/Customers.js'
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [selectedForm, setForm] = useState( 0 )
+  const [user, setUser] = useState( '' )
+
+  const [Customers_db, setCustomer_db] = useState( customers )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="App">
+      <HeaderBar  isLoggedIn={isLoggedIn} setForm={setForm}
+                  user={user} setUser={setUser} 
+                  setLoggedIn={setLoggedIn} />
+
+      <AppContent setLoggedIn={setLoggedIn}     isLoggedIn={isLoggedIn}
+                  selectedForm={selectedForm}   setForm={setForm} setUser={setUser}
+                  Customers_db = {Customers_db}   setCustomer_db={setCustomer_db}/>
     </div>
   );
 }
